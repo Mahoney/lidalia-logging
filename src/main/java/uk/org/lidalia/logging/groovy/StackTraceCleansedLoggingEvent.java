@@ -1,4 +1,4 @@
-package uk.org.lidalia.monitoring.logging.groovy;
+package uk.org.lidalia.logging.groovy;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;

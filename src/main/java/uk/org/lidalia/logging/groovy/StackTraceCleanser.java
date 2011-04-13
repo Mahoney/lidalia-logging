@@ -1,7 +1,7 @@
-package uk.org.lidalia.monitoring.logging.groovy;
+package uk.org.lidalia.logging.groovy;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import uk.org.lidalia.monitoring.logging.EventTransformer;
+import uk.org.lidalia.logging.EventTransformer;
 
 public class StackTraceCleanser implements EventTransformer {
 	@Override public ILoggingEvent transformEvent(ILoggingEvent toBeDecorated) {

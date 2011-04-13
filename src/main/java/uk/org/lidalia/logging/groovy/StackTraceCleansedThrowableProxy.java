@@ -1,4 +1,4 @@
-package uk.org.lidalia.monitoring.logging.groovy;
+package uk.org.lidalia.logging.groovy;
 
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.StackTraceElementProxy;

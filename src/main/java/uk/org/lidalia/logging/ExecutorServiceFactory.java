@@ -1,4 +1,4 @@
-package uk.org.lidalia.monitoring.logging;
+package uk.org.lidalia.logging;
 
 import java.util.concurrent.ExecutorService;
 
