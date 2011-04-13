@@ -19,21 +19,21 @@ public abstract class DecoratingAppender extends AppenderBase<ILoggingEvent> imp
 		return decoratedAppender;
 	}
 
-	public void setDecoratedAppender(Appender<ILoggingEvent> decoratedAppender) {
+	public void setDecoratedAppender(final Appender<ILoggingEvent> decoratedAppender) {
 		this.decoratedAppender = decoratedAppender;
 	}
 
 	@Override
 	public void start() {
-    if (this.decoratedAppender == null) {
-      addError("No appender to decorate set for the appender named \"" + name + "\".");
-    } else {
+		if (this.decoratedAppender == null) {
+			addError("No appender to decorate set for the appender named \"" + name + "\".");
+		} else {
 			super.start();
 		}
-  }
+	}
 
 	@Override
-	public void addAppender(Appender<ILoggingEvent> newAppender) {
+	public void addAppender(final Appender<ILoggingEvent> newAppender) {
 		setDecoratedAppender(newAppender);
 	}
 

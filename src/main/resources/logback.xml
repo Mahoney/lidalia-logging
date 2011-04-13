@@ -1,0 +1,40 @@
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Decorates the console appender with an appender that transforms each logging event on append -->
+	<appender name="groovyStdOut" class="uk.org.lidalia.logging.EventTransformingAppender">
+		<!-- the appender that is decorated -->
+		<appender-ref ref="STDOUT" />
+		<!--
+		a class with a no arg constructor that implements EventTransformer;
+		in this case one that removes all the redundant stack frames from
+		a groovy stack trace
+		-->
+		<eventTransformer class="uk.org.lidalia.logging.groovy.StackTraceCleanser"/>
+	</appender>
+
+	<!-- Decorates the console appender to make it asynchronous -->
+	<appender name="asyncGroovyStdOut" class="uk.org.lidalia.logging.AsyncAppender">
+		<!-- the appender that is decorated -->
+		<appender-ref ref="groovyStdOut" />
+		<!--
+		the number of threads to use
+		* defaults to 1 if not provided
+		* may be any JavaScript expression that results in a number, using "R" to mean
+			the result of Runtime.getRuntime().availableProcessors()
+		* may be the string "infinite" if a cached thread pool is desired
+  		-->
+		<threads>(R * 2) - 1</threads>
+	</appender>
+
+	<root level="warn">
+		<appender-ref ref="asyncGroovyStdOut" />
+	</root>
+</configuration>
