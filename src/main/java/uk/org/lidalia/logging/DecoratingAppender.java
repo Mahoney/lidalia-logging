@@ -5,7 +5,6 @@ import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.AppenderBase;
 import ch.qos.logback.core.spi.AppenderAttachable;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 public abstract class DecoratingAppender extends AppenderBase<ILoggingEvent> implements AppenderAttachable<ILoggingEvent> {

@@ -57,24 +57,24 @@ class StackTraceCleansedThrowableProxy implements IThrowableProxy {
 		if (parent == null) {
 			return 0;
 		}
-		StackTraceElementProxy[] stackTraceElementProxies = getStackTraceElementProxyArray();
-		StackTraceElementProxy[] parentStackTraceElementProxies = parent.getStackTraceElementProxyArray();
-    int steIndex = getStackTraceElementProxyArray().length - 1;
-    int parentIndex = parentStackTraceElementProxies.length - 1;
-    int count = 0;
-    while (steIndex >= 0 && parentIndex >= 0) {
-      StackTraceElementProxy ste = getStackTraceElementProxyArray()[steIndex];
-      StackTraceElementProxy otherSte = parentStackTraceElementProxies[parentIndex];
-      if (ste.equals(otherSte)) {
-        count++;
-      } else {
-        break;
-      }
-      steIndex--;
-      parentIndex--;
-    }
-    return count;
-  }
+		StackTraceElementProxy[] parentStackTraceElementProxies = parent
+				.getStackTraceElementProxyArray();
+		int steIndex = getStackTraceElementProxyArray().length - 1;
+		int parentIndex = parentStackTraceElementProxies.length - 1;
+		int count = 0;
+		while (steIndex >= 0 && parentIndex >= 0) {
+			StackTraceElementProxy ste = getStackTraceElementProxyArray()[steIndex];
+			StackTraceElementProxy otherSte = parentStackTraceElementProxies[parentIndex];
+			if (ste.equals(otherSte)) {
+				count++;
+			} else {
+				break;
+			}
+			steIndex--;
+			parentIndex--;
+		}
+		return count;
+	}
 
 	public String getMessage() {
 		return decoratedThrowable.getMessage();
