@@ -70,7 +70,7 @@ final class StackTraceCleansedLoggingEvent implements ILoggingEvent {
 		return realEvent.getMDCPropertyMap();
 	}
 
-	public Map<String, String> getMdc() {
+	@Deprecated public Map<String, String> getMdc() {
 		return realEvent.getMdc();
 	}
 
