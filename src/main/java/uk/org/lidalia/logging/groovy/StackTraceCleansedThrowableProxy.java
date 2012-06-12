@@ -10,6 +10,7 @@ class StackTraceCleansedThrowableProxy implements IThrowableProxy {
 
 	private final IThrowableProxy decoratedThrowable;
 	private final IThrowableProxy cleansedCause;
+    private final IThrowableProxy[] cleansedSuppressed;
 	private final StackTraceElementProxy[] cleansedStackTraceElementProxyArray;
 	private final int commonFrames;
 
@@ -25,6 +26,15 @@ class StackTraceCleansedThrowableProxy implements IThrowableProxy {
 		} else {
 			cleansedCause = new StackTraceCleansedThrowableProxy(this, decoratedThrowable.getCause());
 		}
+        IThrowableProxy[] suppressed = decoratedThrowable.getSuppressed();
+        if (suppressed != null) {
+            cleansedSuppressed = new IThrowableProxy[suppressed.length];
+            for (int i = 0; i < suppressed.length; i++) {
+                cleansedSuppressed[i] = new StackTraceCleansedThrowableProxy(this, suppressed[i]);
+            }
+        } else {
+            cleansedSuppressed = null;
+        }
 		this.commonFrames = findNumberOfCommonFrames(parent);
 	}
 
@@ -95,4 +105,9 @@ class StackTraceCleansedThrowableProxy implements IThrowableProxy {
 	public IThrowableProxy getCause() {
 		return cleansedCause;
 	}
+
+    @Override
+    public IThrowableProxy[] getSuppressed() {
+        return cleansedSuppressed;
+    }
 }
